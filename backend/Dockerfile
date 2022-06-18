@@ -128,7 +128,7 @@ COPY --from=symfony_php /srv/app/public public/
 COPY docker/caddy/Caddyfile /etc/caddy/Caddyfile
 
 
-# Dockerfile
+# XDebug
 FROM symfony_php AS symfony_php_debug
 
 ARG XDEBUG_VERSION=3.1.2
@@ -137,3 +137,5 @@ RUN set -eux; \
 	pecl install xdebug-$XDEBUG_VERSION; \
 	docker-php-ext-enable xdebug; \
 	apk del .build-deps
+
+ADD xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
